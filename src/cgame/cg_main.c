@@ -426,7 +426,7 @@ static cvarTable_t cvarTable[] =
 	{ &cg_autoactivate,            "cg_autoactivate",            "1",           CVAR_ARCHIVE,                 0 },
 
 	// more fluid rotations
-	{ &cg_swingSpeed,              "cg_swingSpeed",              "0.1",         CVAR_CHEAT,                   0 }, // was 0.3 for Q3
+	{ &cg_swingSpeed,              "cg_swingSpeed",              "0.1",         CVAR_ARCHIVE,                   0 }, // was 0.3 for Q3
 	{ &cg_bloodTime,               "cg_bloodTime",               "120",         CVAR_ARCHIVE,                 0 },
 
 	{ &cg_skybox,                  "cg_skybox",                  "1",           CVAR_ARCHIVE,                 0 },
@@ -755,6 +755,18 @@ void CG_UpdateCvars(void)
 					else if (cg_errorDecay.value > 500.0f)
 					{
 						trap_Cvar_Set("cg_errorDecay", "500");
+					}
+				}
+				else if (cv->vmCvar == &cg_swingSpeed)
+				{
+					// allow range between 0.1 and 0.3
+					if (cg_swingSpeed.value < 0.1f)
+					{
+						trap_Cvar_Set("cg_swingSpeed", "0.1");
+					}
+					else if (cg_swingSpeed.value > 0.3f)
+					{
+						trap_Cvar_Set("cg_swingSpeed", "0.3");
 					}
 				}
 			}
